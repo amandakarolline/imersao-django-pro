@@ -19,6 +19,7 @@
           run: |
             pip install pipenv
             pipenv sync --dev
+            pip install pytest
         - name: Rodas Testes Automaticos
           run: |
             pipenv run pytest webdev
