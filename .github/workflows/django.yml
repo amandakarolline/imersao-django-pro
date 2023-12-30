@@ -18,7 +18,7 @@
         - name: Install dependencies
           run: |
             pip install pipenv
-            sync pipenv --dev
+            pipenv sync --dev
         - name: Rodas Testes Automaticos
           run: |
             pipenv run pytest webdev
