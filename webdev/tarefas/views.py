@@ -2,11 +2,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from webdev.tarefas.forms import TarefaNovaForm, TarefaForm
 from django.urls import reverse
-
 from webdev.tarefas.models import Tarefa
 
-
-# Create your views here.
 
 def home(request):
     if request.method == 'POST':
@@ -34,8 +31,15 @@ def home(request):
 
 
 def detalhe(request, tarefa_id):
-    tarefa = Tarefa.objects.get(id=tarefa_id)
-    form = TarefaForm(request.POST, instance=tarefa)
-    if form.is_valid():
-        form.save()
+    if request.method == 'POST':
+        tarefa = Tarefa.objects.get(id=tarefa_id)
+        form = TarefaForm(request.POST, instance=tarefa)
+        if form.is_valid():
+            form.save()
+    return HttpResponseRedirect(reverse('tarefas:home'))
+
+
+def apagar(request, tarefa_id):
+    if request.method == 'POST':
+        Tarefa.objects.filter(id=tarefa_id).delete()
     return HttpResponseRedirect(reverse('tarefas:home'))
