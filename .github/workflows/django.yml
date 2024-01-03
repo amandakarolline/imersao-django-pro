@@ -21,6 +21,13 @@
             pip install pipenv
             pipenv sync --dev
             pip install -r requirements.txt
+        - name: Rodar Secret Key
+          with:
+            super_secret: ${{ secrets.SECRET_KEY }}
+          run: |
+            echo ${{ secrets.SECRET_KEY }}
+          env:
+            SECRET_KEY: ${{ secrets.SECRET_KEY }}
         - name: Rodas Testes Automaticos
           run: |
             pipenv run pytest webdev
